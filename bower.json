@@ -1,0 +1,31 @@
+{
+  "name": "isabelly",
+  "version": "0.0.0",
+  "authors": [
+    "Ariel Gonzalez <ArielGonzalez515@gmail.com>"
+  ],
+  "description": "app to store images, videos, and notes of our baby girl",
+  "main": "app",
+  "moduleType": [
+    "globals",
+    "node"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.2.1",
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-ui-router": "~0.2.18",
+    "font-awesome": "~4.5.0",
+    "angular-material": "~1.0.5",
+    "angular-socket-io": "~0.7.0"
+  }
+}

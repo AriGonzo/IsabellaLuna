@@ -1,0 +1,23 @@
+.navbar {
+  background: #59AC8B;
+
+  #izzyHeader {
+    cursor: pointer;
+
+    .navbar-text, a {
+      color: white;
+    }
+
+    #brandLogo {
+      font-family: 'GiveYouGlory', sans-serif;
+      font-weight: bolder;
+      font-size: 30pt;
+      margin-bottom: 3px;
+
+      i {
+        font-size: 24pt;
+        font-weight: 700;
+      }
+    }
+  }
+}
