@@ -15,5 +15,6 @@ module.exports = mongoose.model('Post', {
   uploads: [{ type: Schema.Types.ObjectId, ref: 'Uploads' }],
   text: String,
   tags: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  first: String
+  first: String,
+  created_on: { type: Date, default: Date.now }
 });

@@ -1,14 +1,54 @@
 <div class="jumbotron text-center">
     <div class="post_background">
         <md-input-container class="md-block">
-            <textarea placeholder="What's your Message for Isabella?" id="postTextArea" ng-model="post.text" rows="5"></textarea>
+            <textarea placeholder="What's your Message for Isabella?" id="postTextArea" ng-model="post.text" rows="5" my-enter="submitPost(post)"></textarea>
         </md-input-container>
-        <md-button class="md-raised md-primary pull-right pink_btn" ng-click="submitPost(post)">Primary</md-button>
+        <md-button class="md-raised md-primary pull-right pink_btn" ng-click="submitPost(post)">Post</md-button>
     </div>
 </div>
 
-<ul class="posts">
-    <li ng-repeat="post in posts">
-        {{post.text}}
+<div layout="column" flex layout-fill ng-cloak>
+    <md-content>
+        <section>
+            <div layout="row" id="post_feed_header">
+                <div flex></div>
+                <div flex class="text-center header_items">All Posts</div>
+                <div flex class="text-center header_items">Photos</div>
+                <div flex class="text-center header_items">Videos</div>
+                <div flex class="text-center header_items">Firsts</div>
+                <div flex></div>
+            </div>
+        </section>
+    </md-content>
+
+    <ul class="posts">
+    <li ng-repeat="post in posts | orderBy: 'created_at' :true ">
+        <div flex-xs flex-gt-xs="75" layout="column" layout-align="center" class="post_contain_div">
+            <md-card class="post_cards">
+            <img  class="md-card-image" hidden alt="Washed Out">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">User Name Goes Here:</span>
+                </md-card-title-text>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button class="md-icon-button" aria-label="Favorite">
+                        <i class="material-icons">favorite_border</i>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Settings">
+                        <!--<md-icon md-svg-icon="img/icons/menu.svg"></md-icon>-->
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Share">
+                        <!--<md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>-->
+                    </md-button>
+                </md-card-actions>
+            </md-card-title>
+            <md-card-content>
+                <p>
+                    {{post.text}}
+                </p>
+            </md-card-content>
+        </md-card>
+        </div>
     </li>
 </ul>
+</div>

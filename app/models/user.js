@@ -10,5 +10,6 @@ module.exports = mongoose.model('User', {
   email: String,
   password: String,
   relationship: String,
-  favoritePosts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+  favoritePosts: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+  created_on: { type: Date, default: Date.now }
 });

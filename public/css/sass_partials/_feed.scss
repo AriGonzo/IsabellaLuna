@@ -1,10 +1,11 @@
 .jumbotron {
   background-image: url("../img/yellow-polka-dot-background.jpg");
-  height: 500px;
+  height: 450px;
+  margin-bottom: 0;
 
   .post_background {
     width: 50%;
-    height: 80%;
+    height: 90%;
     margin: auto;
     background: rgba(89,172,139,0.7);
 
@@ -14,6 +15,27 @@
       margin-top: 1ex;
       max-height: 150px;
       line-height: 1;
+    }
+  }
+}
+
+#post_feed_header {
+  background: #59AC8B;
+
+  .header_items {
+    padding: 15px;
+    font-size: 18pt;
+    color: white;
+  }
+}
+
+.posts {
+  margin-top: 2%;
+  .post_contain_div {
+    margin: auto;
+
+    .post_cards {
+      background: #F7FCD6;
     }
   }
 }

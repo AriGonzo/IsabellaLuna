@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="lib/angular-material/angular-material.min.css">
         <link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
         <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" href="css/app.css">
 
         <!-- JS LIBRARIES -->
@@ -32,7 +33,7 @@
 
     <body ng-controller="HeaderController">
 
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar navbar-fixed-top">
             <div class="container" id="izzyHeader">
                 <h3 id="brandLogo" class="navbar-text navbar-left">Isabella<i class="fa fa-moon-o"></i></h3>
                 <ul class="nav navbar-nav navbar-right">
@@ -50,6 +51,6 @@
             </div>
         </nav>
 
-        <div ui-view></div>
+        <div id="ui_view_div" ui-view></div>
     </body>
 </html>

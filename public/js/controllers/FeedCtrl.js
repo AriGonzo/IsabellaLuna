@@ -9,6 +9,7 @@ angular.module('FeedCtrl', ['SocketService'])
 
     $scope.submitPost = function (post) {
       socket.emit('submit post', post);
+      $scope.post.text = null;
     };
 
     socket.on('post saved', function (post) {
@@ -16,4 +17,17 @@ angular.module('FeedCtrl', ['SocketService'])
       $scope.posts.push(post);
     });
 
+})
+  .directive('myEnter', function () {
+  return function (scope, element, attrs) {
+    element.bind("keydown keypress", function (event) {
+      if(event.which === 13) {
+        scope.$apply(function (){
+          scope.$eval(attrs.myEnter);
+        });
+
+        event.preventDefault();
+      }
+    });
+  };
 });
