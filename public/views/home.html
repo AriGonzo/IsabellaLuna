@@ -1,13 +1,14 @@
 <div class="jumbotron text-center">
     <div class="post_background">
-        <h1>How much do you love her?</h1>
-
-        <p>{{ tagline }}</p>
-
         <md-input-container class="md-block">
-            <label>Address</label>
-            <input ng-model="user.name">
+            <textarea placeholder="What's your Message for Isabella?" id="postTextArea" ng-model="post.text" rows="5"></textarea>
         </md-input-container>
-        <md-button class="md-raised md-primary" ng-click="submitUser(user)">Primary</md-button>
+        <md-button class="md-raised md-primary pull-right pink_btn" ng-click="submitPost(post)">Primary</md-button>
     </div>
 </div>
+
+<ul class="posts">
+    <li ng-repeat="post in posts">
+        {{post.text}}
+    </li>
+</ul>

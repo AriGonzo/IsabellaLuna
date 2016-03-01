@@ -59,23 +59,24 @@ console.log('Magic happens on port ' + port);
 // sockets ==================================================
 
 io.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
   console.log('socket.io connected!');
 
-  socket.on('my other event', function (data) {
-    console.log('Received New User!');
-    User.findOne({email: data.email || null}, function (err, oUser) {
-      console.log('oUser is ',oUser)
-      if (oUser == null ){
-        oUser = new User();
-      }
-      oUser.name = data.name;
-      oUser.email = data.email;
-      oUser.save(function (err, user) {
-        socket.emit('user saved', user)
-      })
+  socket.on('submit post', function (post) {
+    console.log('Received New Post!');
+
+    var oPost = new Post();
+    oPost.text = post.text;
+    oPost.save(function (err, post) {
+      console.log('post saved!');
+      socket.emit('post saved', post)
     });
   });
+
+  socket.on('get posts', function (a, b) {
+    Post.find().exec(function (err, posts) {
+      socket.emit('sending posts', posts);
+    })
+  })
 
 });
 

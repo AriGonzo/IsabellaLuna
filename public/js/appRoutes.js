@@ -9,7 +9,7 @@ angular.module('appRoutes', [])
     .state('home', {
       url: '/home',
       templateUrl: '../views/home.html',
-      controller: 'UserController'
+      controller: 'FeedController'
     })
 
 }]);

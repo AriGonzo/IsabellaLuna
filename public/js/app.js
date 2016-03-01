@@ -1,1 +1,1 @@
-var app = angular.module('luna', ['ui.router', 'ngMaterial', 'appRoutes', 'MainCtrl', 'UserCtrl']);
+var app = angular.module('luna', ['ui.router', 'ngMaterial', 'appRoutes', 'MainCtrl', 'FeedCtrl']);
