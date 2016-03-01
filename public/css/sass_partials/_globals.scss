@@ -16,4 +16,12 @@ body {
       background-color: #E37695!important;
     }
   }
+  md-content {
+    background: inherit;
+  }
+  #nav.affix {
+    position: fixed;
+    top: 0;
+    width: 100%
+  }
 }

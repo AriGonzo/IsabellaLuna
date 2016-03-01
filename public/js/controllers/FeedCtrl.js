@@ -1,4 +1,4 @@
-angular.module('FeedCtrl', ['SocketService'])
+angular.module('FeedCtrl', ['SocketService', 'ngMaterial'])
   .controller('FeedController', function($scope, socket) {
 
     $scope.posts = [];
@@ -16,7 +16,6 @@ angular.module('FeedCtrl', ['SocketService'])
       console.log('saved this post!', post);
       $scope.posts.push(post);
     });
-
 })
   .directive('myEnter', function () {
   return function (scope, element, attrs) {
