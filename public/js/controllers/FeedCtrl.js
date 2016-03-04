@@ -8,6 +8,7 @@ angular.module('FeedCtrl', ['SocketService', 'ngMaterial'])
     });
 
     $scope.submitPost = function (post) {
+      console.log('submitting post', post)
       socket.emit('submit post', post);
       $scope.post.text = null;
     };

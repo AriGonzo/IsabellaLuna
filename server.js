@@ -62,12 +62,12 @@ io.on('connection', function (socket) {
   console.log('socket.io connected!');
 
   socket.on('submit post', function (post) {
-    console.log('Received New Post!');
+    console.log('Received New Post!', post);
 
     var oPost = new Post();
     oPost.text = post.text;
     oPost.save(function (err, post) {
-      console.log('post saved!');
+      console.log('post saved!', post);
       socket.emit('post saved', post)
     });
   });
