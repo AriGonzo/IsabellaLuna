@@ -14,6 +14,7 @@ angular.module('FeedCtrl', ['SocketService', 'ngMaterial'])
 
     socket.on('post saved', function (post) {
       console.log('saved this post!', post);
+      console.log($scope.posts)
       $scope.posts.push(post);
     });
 })
