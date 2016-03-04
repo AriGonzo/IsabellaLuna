@@ -2,10 +2,25 @@
 
 <div class="jumbotron text-center">
     <div class="post_background">
-        <md-input-container class="md-block">
-            <textarea placeholder="What's your Message for Isabella?" id="postTextArea" ng-model="post.text" rows="5" my-enter="submitPost(post)"></textarea>
+        <md-input-container id="postInput" class="md-block">
+            <textarea placeholder="What's your Message for Isabella?" id="postTextArea" ng-model="post.text" rows="1" my-enter="submitPost(post)"></textarea>
         </md-input-container>
-        <md-button class="md-raised md-primary pull-right pink_btn" ng-click="submitPost(post)">Post</md-button>
+        <div class="container" id="post_button_container">
+            <div class="row">
+                <div class="col-md-2 post_icon">
+                    <i class="material-icons">add_a_photo</i>
+                </div>
+                <div class="col-md-2 post_icon">
+                    <i class="material-icons">video_call</i>
+                </div>
+                <div class="col-md-2 post_icon">
+                    <i class="material-icons">looks_one</i>
+                </div>
+                <div id="postBtn" class="col-md-3 col-md-offset-3 post_icon">
+                    <md-button class="md-raised md-primary pink_btn" ng-click="submitPost(post)">Post</md-button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -33,7 +48,7 @@
                             <i class="material-icons">favorite_border</i>
                         </md-button>
                         <md-button class="md-icon-button" aria-label="Settings">
-                            <!--<md-icon md-svg-icon="img/icons/menu.svg"></md-icon>-->
+                            <md-icon md-svg-icon="alarm"         style="color: #0F0;"                        aria-label="Alarm Icon"></md-icon>
                         </md-button>
                         <md-button class="md-icon-button" aria-label="Share">
                             <!--<md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>-->

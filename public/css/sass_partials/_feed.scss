@@ -8,13 +8,52 @@
     height: 90%;
     margin: auto;
     background: rgba(89,172,139,0.7);
+    outline: 5px solid white;
+    position: relative;
+
+    #postInput {
+      label {
+        font-size: 29px;
+        color: #ECECEC;
+        margin-bottom: -35px;
+      }
+    }
 
     #postTextArea {
       color: white;
       font-size: 3em;
-      margin-top: 1ex;
-      max-height: 150px;
+      margin-top: 2ex;
+      height: 100px;
+      overflow: scroll;
       line-height: 1;
+    }
+    #post_button_container {
+      position: absolute;
+      bottom: 0;
+    }
+
+    .md-input-focused {
+      label {
+        color: grey!important;
+      }
+    }
+    .post_icon {
+      cursor: pointer;
+      padding: 20px 0;
+      i {
+        font-size: 40px;
+        color: #ECECEC;
+      }
+      div {
+        color: #ECECEC;
+        font-size: 18px;
+      }
+      &:hover {
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
+    #postBtn {
+      background-color: rgba(0,0,0,0);
     }
   }
 }
