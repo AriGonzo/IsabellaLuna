@@ -68,7 +68,7 @@ io.on('connection', function (socket) {
     oPost.text = post.text;
     oPost.save(function (err, post) {
       console.log('post saved!', post);
-      socket.broadcast.emit('post saved', post)
+      io.emit('post saved', post)
     });
   });
 
