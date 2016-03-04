@@ -2,6 +2,7 @@
 
 // grab the user model we just created
 var User = require('./models/user');
+var path = require('path');
 
 module.exports = function(app) {
 

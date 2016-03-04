@@ -27,6 +27,8 @@
     "font-awesome": "~4.5.0",
     "angular-material": "~1.0.5",
     "angular-socket-io": "~0.7.0",
-    "ngSticky": "~1.8.7"
+    "ngSticky": "~1.8.7",
+    "angular-moment": "~0.10.3",
+    "moment": "~2.11.2"
   }
 }
