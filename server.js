@@ -16,7 +16,7 @@ var sassMiddleware = require('node-sass-middleware');
 var db = require('./config/db');
 
 // set our port
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 80;
 
 // connect to our mongoDB database
 // (uncomment after you enter in your own credentials in config/db.js)
