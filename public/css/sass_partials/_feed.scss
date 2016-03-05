@@ -1,6 +1,6 @@
 .jumbotron {
   background-image: url("../img/yellow-polka-dot-background.jpg");
-  height: 450px;
+  height: 350px;
   margin-bottom: 0;
 
   .post_background {
@@ -26,20 +26,27 @@
       height: 100px;
       overflow: scroll;
       line-height: 1;
+      border-color: rgba(0,0,0,0);
     }
     #post_button_container {
       position: absolute;
       bottom: 0;
+      .row {
+        border-top: 2px solid #ECECEC;
+      }
     }
 
     .md-input-focused {
       label {
         color: grey!important;
       }
+      textarea {
+        border-color: rgba(0,0,0,0);
+      }
     }
     .post_icon {
       cursor: pointer;
-      padding: 20px 0;
+      padding: 15px 0;
       i {
         font-size: 40px;
         color: #ECECEC;
@@ -65,7 +72,18 @@
     padding: 15px;
     font-size: 18pt;
     color: white;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(0,0,0,0.05);
+      border-bottom: 5px solid #FFF37B;
+    }
   }
+
+  .active {
+    font-weight: bolder;
+    border-bottom: 5px solid #FFF37B;
+  }
+
 }
 
 .posts {

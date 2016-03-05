@@ -9,14 +9,29 @@
             <div class="row">
                 <div class="col-md-2 post_icon">
                     <i class="material-icons">add_a_photo</i>
+                    <md-tooltip md-direction="Bottom">
+                        Upload Pictures
+                    </md-tooltip>
                 </div>
                 <div class="col-md-2 post_icon">
                     <i class="material-icons">video_call</i>
+                    <md-tooltip md-direction="Bottom">
+                        Upload Video
+                    </md-tooltip>
                 </div>
                 <div class="col-md-2 post_icon">
                     <i class="material-icons">looks_one</i>
+                    <md-tooltip md-direction="Bottom">
+                        Add First
+                    </md-tooltip>
                 </div>
-                <div id="postBtn" class="col-md-3 col-md-offset-3 post_icon">
+                <div class="col-md-2 post_icon">
+                    <i class="material-icons">person_add</i>
+                    <md-tooltip md-direction="Bottom">
+                        Tag Users
+                    </md-tooltip>
+                </div>
+                <div id="postBtn" class="col-md-3 col-md-offset-1 post_icon">
                     <md-button class="md-raised md-primary pink_btn" ng-click="submitPost(post)">Post</md-button>
                 </div>
             </div>
@@ -28,7 +43,7 @@
 
 <div layout="row" id="post_feed_header">
     <div flex></div>
-    <div flex class="text-center header_items">All Posts</div>
+    <div flex class="text-center header_items active">All Posts</div>
     <div flex class="text-center header_items">Photos</div>
     <div flex class="text-center header_items">Videos</div>
     <div flex class="text-center header_items">Firsts</div>
