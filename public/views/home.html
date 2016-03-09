@@ -1,19 +1,24 @@
-
-
 <div class="jumbotron text-center">
     <div class="post_background">
         <md-input-container id="postInput" class="md-block">
             <textarea placeholder="What's your Message for Isabella?" id="postTextArea" ng-model="post.text" rows="1" my-enter="submitPost(post)"></textarea>
         </md-input-container>
+        <div ng-show="showImages" id="imagePreviewRow" >
+            <div id="imageRepeatContainer">
+                <img ng-repeat="postImage in postImages" ng-src="{{postImage}}" class="imagePreview" />
+            </div>
+        </div>
         <div class="container" id="post_button_container">
             <div class="row">
-                <div class="col-md-2 post_icon">
+                <input multiple type="file" id="image_upload" class="hide" ng-file-select="onFileSelect($files)" ng-model="imageSrc" />
+                <div class="col-md-2 post_icon" ng-click="imageUpload('image_upload')">
                     <i class="material-icons">add_a_photo</i>
                     <md-tooltip md-direction="Bottom">
                         Upload Pictures
                     </md-tooltip>
                 </div>
-                <div class="col-md-2 post_icon">
+                <input type="file" accept="video/mp4" id="video_upload" class="hide" name="video_upload" />
+                <div class="col-md-2 post_icon" ng-click="imageUpload('video_upload')">
                     <i class="material-icons">video_call</i>
                     <md-tooltip md-direction="Bottom">
                         Upload Video
@@ -32,7 +37,7 @@
                     </md-tooltip>
                 </div>
                 <div id="postBtn" class="col-md-3 col-md-offset-1 post_icon">
-                    <md-button class="md-raised md-primary pink_btn" ng-click="submitPost(post)">Post</md-button>
+                    <md-button id="postAction" class="md-raised md-primary pink_btn" ng-click="submitPost(post)">Post</md-button>
                 </div>
             </div>
         </div>
@@ -41,12 +46,12 @@
 
 
 
-<div layout="row" id="post_feed_header">
+<div layout="row" id="post_feed_header" ng-init="selectedTab = 'allPosts'">
     <div flex></div>
-    <div flex class="text-center header_items active">All Posts</div>
-    <div flex class="text-center header_items">Photos</div>
-    <div flex class="text-center header_items">Videos</div>
-    <div flex class="text-center header_items">Firsts</div>
+    <div flex ng-class="{'active':selectedTab === 'allPosts'}" ng-click="selectedTab = 'allPosts'" class="text-center header_items">All Posts</div>
+    <div flex ng-class="{'active':selectedTab === 'photos'}" ng-click="selectedTab = 'photos'" class="text-center header_items">Photos</div>
+    <div flex ng-class="{'active':selectedTab === 'videos'}" ng-click="selectedTab = 'videos'" class="text-center header_items">Videos</div>
+    <div flex  ng-class="{'active':selectedTab === 'firsts'}" ng-click="selectedTab = 'firsts'" class="text-center header_items">Firsts</div>
     <div flex></div>
 </div>
 
@@ -61,9 +66,6 @@
                     <md-card-actions layout="row" layout-align="end center">
                         <md-button class="md-icon-button" aria-label="Favorite">
                             <i class="material-icons">favorite_border</i>
-                        </md-button>
-                        <md-button class="md-icon-button" aria-label="Settings">
-                            <md-icon md-svg-icon="alarm"         style="color: #0F0;"                        aria-label="Alarm Icon"></md-icon>
                         </md-button>
                         <md-button class="md-icon-button" aria-label="Share">
                             <!--<md-icon md-svg-icon="img/icons/share-arrow.svg"></md-icon>-->

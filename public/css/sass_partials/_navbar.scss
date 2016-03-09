@@ -2,7 +2,6 @@
   background: #59AC8B;
 
   #izzyHeader {
-    cursor: pointer;
 
     .navbar-text, a {
       color: white;
@@ -13,7 +12,7 @@
       font-weight: bolder;
       font-size: 30pt;
       margin-bottom: 3px;
-
+      cursor: pointer;
       i {
         font-size: 24pt;
         font-weight: 700;

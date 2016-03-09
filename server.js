@@ -8,8 +8,16 @@ var server         = require('http').Server(app);
 var io             = require('socket.io')(server);
 var User           = require('./app/models/user');
 var Post           = require('./app/models/post');
+var Upload         = require('./app/models/upload');
 var path           = require('path');
 var sassMiddleware = require('node-sass-middleware');
+var siofu          = require("socketio-file-upload");
+var ImageService   = require('./app/services/ImageService.js');
+var AWS            = require('aws-sdk');
+AWS.config.loadFromPath('./resources/s3_config.json');
+var s3Bucket       = new AWS.S3( { params: {Bucket: 'isabelly'} } );
+var async          = require('async');
+var fileType       = require('file-type');
 // configuration ===========================================
 
 // config files
@@ -30,6 +38,8 @@ app.use(bodyParser.json());
 // parse application/vnd.api+json as json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
+// set up socket.io image uploader
+app.use(siofu.router);
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -62,21 +72,84 @@ console.log('Magic happens on port ' + port);
 io.on('connection', function (socket) {
   console.log('socket.io connected!');
 
-  socket.on('submit post', function (post) {
-    console.log('Received New Post!', post);
+  //Setup
+  var uploader = new siofu();
+  uploader.listen(socket);
 
+
+  // Listeners
+  socket.on('submit post', function (postBody) {
+    console.log('Received new post!', postBody.post);
+    var postUploads = [];
+    //TODO: Create a new upload object and give it the proper information before triggering the AWS upload
     var oPost = new Post();
-    oPost.text = post.text;
+    oPost.text = postBody.post;
     oPost.save(function (err, post) {
-      console.log('post saved!', post);
-      io.emit('post saved', post)
+      if (postBody.files.length > 0) {
+        var async_functions = [];
+        var postImages = postBody.files;
+        async_functions.push(function (parallel_callback) {
+          async.each(postImages, function (postImage, callback) {
+            var thisUpload = new Upload();
+            var buf = new Buffer(postImage.replace(/^data:image\/\w+;base64,/, ""),'base64');
+            var data = {
+              Key: thisUpload._id.toString(),
+              Body: buf,
+              ContentEncoding: 'base64',
+              ContentType: fileType(buf).mime,
+              ACL:'public-read'
+            };
+            s3Bucket.putObject(data, function(err, data){
+              if (err) {
+                callback(err, data);
+                console.log('Error uploading data: ', data);
+              } else {
+                postUploads.push(thisUpload._id);
+                thisUpload.save(function (err, upload) {
+                  if (err) {
+                    console.log('err saving upload model ', err);
+                    callback(err, null);
+                  }
+                  callback(err, data);
+                  console.log('successfully uploaded the image!', data);
+                });
+              }
+            });
+          }, function (err, data) {
+            if (err) {
+              parallel_callback(err, null)
+            } else {
+              parallel_callback(err, data);
+            }
+          });
+        });
+        async.series(async_functions, function (err, results) {
+          if (err) {
+            console.log(err)
+          } else {
+            oPost.uploads = postUploads;
+            oPost.save(function () {
+              console.log('post saved!', post);
+              io.emit('post saved', post);
+            });
+          }
+        });
+      } else {
+        console.log('post saved!', post);
+        io.emit('post saved', post);
+      }
     });
   });
 
-  socket.on('get posts', function (a, b) {
+  socket.on('get posts', function () {
     Post.find().exec(function (err, posts) {
       socket.emit('sending posts', posts);
     })
+  });
+
+  uploader.on('start', function (payload) {
+    console.log('a is ',a);
+    console.log('b is ',b);
   })
 
 });

@@ -29,6 +29,8 @@
     "angular-socket-io": "~0.7.0",
     "ngSticky": "~1.8.7",
     "angular-moment": "~0.10.3",
-    "moment": "~2.11.2"
+    "moment": "~2.11.2",
+    "ng-file-upload": "~12.0.1",
+    "angular-base64": "~2.0.5"
   }
 }

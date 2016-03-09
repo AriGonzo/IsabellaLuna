@@ -10,6 +10,8 @@ var UploadSchema = new Schema({
   content_type: String,
   extension: String,
   size: Number,
+  in_amazon_s3: Boolean,
+  amazon_s3_bucket: String,
   modified_by: { type: Schema.Types.ObjectId, ref: 'User' },
   modified_on: Date,
   created_on: { type: Date, default: Date.now }

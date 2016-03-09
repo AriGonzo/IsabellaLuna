@@ -9,6 +9,10 @@ body {
     background: #ECECEC;
     .pink_btn {
       background-color: #E37695!important;
+
+      &:hover {
+        background: #E2507A!important;
+      }
     }
   }
   md-content {
