@@ -1,6 +1,9 @@
 <div class="jumbotron text-center">
     <div class="post_background">
         <md-input-container id="postInput" class="md-block">
+            <div id="loadingContainer" ng-show="showLoader">
+                <img src="../img/loading2.gif" id="loadingSpinner" />
+            </div>
             <textarea placeholder="What's your Message for Isabella?" id="postTextArea" ng-model="post.text" rows="1" my-enter="submitPost(post)"></textarea>
         </md-input-container>
         <div ng-show="showImages" id="imagePreviewRow" >
@@ -76,8 +79,14 @@
                     <p>
                         {{post.text}}
                     </p>
+                    <ul ng-hide="post.uploads.length < 0" class="pictureUploadsList slide-list">
+                        <li ng-repeat="upload in post.uploads track by $index" ng-click="showGallery($index, post.uploads)">
+                            <img ng-src="{{upload.src}}" alt="slide number {{ $index }}" class="postImage" />
+                        </li>
+                    </ul>
                 </md-card-content>
             </md-card>
         </div>
-    </md-list-item>
+    </li>
 </ul>
+<div ng-photoswipe slides="uploadList" open="openGallery" on-close="closeGallery()" options="opts"></div>

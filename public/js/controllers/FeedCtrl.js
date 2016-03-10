@@ -1,21 +1,44 @@
-angular.module('FeedCtrl', ['SocketService', 'ngMaterial'])
-  .controller('FeedController', function($scope, $timeout, socket, fileReader) {
+angular.module('FeedCtrl', ['SocketService', 'ngMaterial', 'ngPhotoswipe'])
+  .controller('FeedController', function($scope, $timeout, socket) {
 
     //controller variables
     $scope.posts = [];
     $scope.postImages = [];
     $scope.imageSrc = "";
     $scope.showImages = false;
+    $scope.showLoader = false;
+    $scope.openGallery = false;
+    $scope.uploadList - [];
+    $scope.getObj = function (list) {
+      $scope.uploadList = list || [];
+      return $scope.uploadList
+    };
+    $scope.opts = {
+      index: 0,
+      history: false
+    };
 
     //Sockets
     socket.service.emit('get posts');
     socket.service.on('sending posts', function (posts) {
+      angular.forEach(posts, function (post) {
+        var imgArray = [];
+        if (post.uploads){
+          angular.forEach(post.uploads, function (upload) {
+            imgArray.push({
+              src:'https://s3.amazonaws.com/isabelly/' + upload,
+              h: 500, w:500
+            })
+          })
+        }
+        post.uploads = imgArray;
+      });
       $scope.posts = posts;
     });
     socket.service.on('post saved', function (post) {
       console.log('saved this post!', post);
-      console.log($scope.posts);
-      $scope.posts.push(post);
+      $scope.showLoader = false;
+      socket.service.emit('get posts');
     });
 
     //Functions
@@ -25,8 +48,8 @@ angular.module('FeedCtrl', ['SocketService', 'ngMaterial'])
         $scope.clicked = true;
       }, 0);
     };
-
     $scope.submitPost = function (post) {
+      $scope.showLoader = true;
       console.log('submitting post', post);
 
       socket.service.emit('submit post', {post: post.text, files: $scope.postImages});
@@ -34,13 +57,25 @@ angular.module('FeedCtrl', ['SocketService', 'ngMaterial'])
       $scope.postImages = [];
       $scope.showImages = false;
     };
+    $scope.showGallery = function (i, list) {
+      $scope.getObj(list);
+      if(angular.isDefined(i)) {
+        $scope.opts.index = i;
+      }
+      $scope.openGallery = true;
+    };
+    $scope.closeGallery = function () {
+      $scope.openGallery = false;
+      $scope.uploadList = [];
+    };
 
+    //Event Listeners
     $scope.$watch('imageSrc', function () {
       $scope.imageSrc !== "" ? $scope.postImages.push($scope.imageSrc) : "";
       $scope.postImages.length > 0 ? $scope.showImages = true : $scope.showImages = false;
-    })
+    });
 
-})
+}) // Pressing Enter to Submit
   .directive('myEnter', function () {
   return function (scope, element, attrs) {
     element.bind("keydown keypress", function (event) {

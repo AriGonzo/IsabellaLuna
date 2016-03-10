@@ -11,6 +11,15 @@
     outline: 5px solid white;
     position: relative;
 
+    #loadingContainer {
+      position: absolute;
+      top: 10px;
+      right: 25px;
+      #loadingSpinner {
+        width: 40px;
+      }
+    }
+
     #postInput {
       overflow: hidden;
       label {
@@ -112,6 +121,15 @@
 
     .post_cards {
       background: #F7FCD6;
+    }
+  }
+  .pictureUploadsList {
+    li {
+      display: inline-block;
+      .postImage {
+        height: 150px;
+        width: auto;
+      }
     }
   }
 }

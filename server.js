@@ -140,7 +140,6 @@ io.on('connection', function (socket) {
       }
     });
   });
-
   socket.on('get posts', function () {
     Post.find().exec(function (err, posts) {
       socket.emit('sending posts', posts);
