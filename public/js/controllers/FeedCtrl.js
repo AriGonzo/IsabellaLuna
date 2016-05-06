@@ -2,7 +2,7 @@ angular.module('FeedCtrl', ['SocketService', 'ngMaterial', 'ngPhotoswipe'])
   .controller('FeedController', function($scope, $timeout, socket) {
 
     //controller variables
-    $scope.posts = [];
+    $scope.posts = ['test'];
     $scope.postImages = [];
     $scope.imageSrc = "";
     $scope.showImages = false;
