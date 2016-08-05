@@ -1,8 +1,5 @@
 var fs = require('fs');
 
-var S3_KEY = 'AKIAIDIQLTX244X2X7MA';
-var S3_SECRET = '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';
-var S3_BUCKET = 'isabelly';
 
 var knox = require('knox').createClient({
   key: S3_KEY,
